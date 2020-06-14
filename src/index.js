@@ -1,9 +1,18 @@
 // importar módulos
 
-import { saludar } from './js/componentes';
 import './styles.css';
 
+import {Todo, TodoList} from './classes';
+import { crearTodoHtml } from './js/componentes';
 
-const nombre = 'Madeleyne';
+const todoList = new TodoList();
 
-saludar(nombre);
+const tarea = new Todo( 'Aprender Javascript' );
+
+tarea.completado = true;
+
+todoList.nuevoTodo( tarea);
+
+console.log(todoList);
+
+crearTodoHtml( tarea );
