@@ -19,7 +19,10 @@ export const crearTodoHtml = (todo) => {
 	</li>`;
 
    // Creando elemento HTML
+
+   // Creando el div
    const div = document.createElement('div');
+   // insertando el htmlTodo al div
    div.innerHTML = htmlTodo;
 
    // Insertando el primer elemento
@@ -37,21 +40,23 @@ txtInput.addEventListener( 'keyup', (event) => {
    //console.log(event);
    if ( txtInput.value != vacio ){
 
+      // keyCode 13 corresponde al boton enter
       if( event.keyCode === 13){
 
          //console.log(txtInput.value);
          
          const nuevoTodo = new Todo( txtInput.value );
+         // se mandar el nuevoTodo al método de nuevo ToDo
          todoList.nuevoTodo( nuevoTodo);
          //console.log(todoList);
          
+         // creando nuevo elemento HTML para insertar el ToDo
          crearTodoHtml( nuevoTodo );
          txtInput.value = vacio;
    
       }
 
-   }
-   
+   } 
    
    
 });
