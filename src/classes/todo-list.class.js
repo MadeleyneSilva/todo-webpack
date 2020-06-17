@@ -1,3 +1,5 @@
+import { Todo } from "./todo.class";
+import { countTodo } from "../js/componentes";
 
 export class TodoList {
 
@@ -30,6 +32,7 @@ export class TodoList {
             if ( todo.id == id){
                 todo.completado = !todo.completado;
                 this.guardarLocalStorage();
+                this.countTodo();
                 break;
             }
         }
@@ -44,6 +47,19 @@ export class TodoList {
         
     }
 
+
+    // Método para contar las tareas pendientes
+    countTodo(){
+        let pendientes = 0;
+        let countBox = countTodo.firstElementChild; // llamando al elemento html donde va la cuenta
+        for (let todo of this.todos ){
+            (!todo.completado === true) ? pendientes++ : null; // pendientes aumenta cada vez que completa = falso
+        }
+        countBox.innerHTML = pendientes; // agrega el contador al HTML
+
+    }
+
+
     guardarLocalStorage(){
 
         // convirtiendo el objeto a un string
@@ -53,20 +69,13 @@ export class TodoList {
 
     cargarLocalStorage() {
 
-        // if( localStorage.getItem('todo')){
-
-        //     // convirtiendo de JSON a objeto o type anterior
-        //     this.todos = JSON.parse( localStorage.getItem('todo'));
-        //     console.log( this.todos);
-            
-
-        // } else {
-
-        //     this.todos = [];
-
-        // }
-
         // operador ternario
         this.todos = (localStorage.getItem('todo') ? JSON.parse( localStorage.getItem('todo')) : [] );
+
+        //this.todos = this.todos.map( obj => Todo.fromJson( obj ));
+        // Lo mismo
+
+        // generando las instancias de los objetos del arreglo y devuelve el arreglo
+        this.todos = this.todos.map( Todo.fromJson);
     }
 }
